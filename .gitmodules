@@ -1,0 +1,6 @@
+[submodule "Tools/radare2"]
+	path = Tools/radare2
+	url = https://github.com/radareorg/radare2
+[submodule "Tools/ghidra"]
+	path = Tools/ghidra
+	url = https://github.com/NationalSecurityAgency/ghidra
