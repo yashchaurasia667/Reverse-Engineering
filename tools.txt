@@ -1,0 +1,8 @@
+detect it easy
+pwndbg
+peda
+gef
+ghidra
+radare2
+olly degugger
+x64 dbg
