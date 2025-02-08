@@ -1,0 +1,79 @@
+GNU gdb (Ubuntu 15.0.50.20240403-0ubuntu1) 15.0.50.20240403-git
+Copyright (C) 2024 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<https://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+    <http://www.gnu.org/software/gdb/documentation/>.
+
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from ./license_2...
+(No debugging symbols found in ./license_2)
+(gdb) Dump of assembler code for function main:
+   0x0000000000401146 <+0>:	push   rbp
+   0x0000000000401147 <+1>:	mov    rbp,rsp
+   0x000000000040114a <+4>:	push   rbx
+   0x000000000040114b <+5>:	sub    rsp,0x28
+   0x000000000040114f <+9>:	mov    DWORD PTR [rbp-0x24],edi
+   0x0000000000401152 <+12>:	mov    QWORD PTR [rbp-0x30],rsi
+   0x0000000000401156 <+16>:	cmp    DWORD PTR [rbp-0x24],0x2
+   0x000000000040115a <+20>:	jne    0x4011fb <main+181>
+   0x0000000000401160 <+26>:	mov    DWORD PTR [rbp-0x14],0x0
+   0x0000000000401167 <+33>:	mov    rax,QWORD PTR [rbp-0x30]
+   0x000000000040116b <+37>:	add    rax,0x8
+   0x000000000040116f <+41>:	mov    rax,QWORD PTR [rax]
+   0x0000000000401172 <+44>:	mov    rsi,rax
+   0x0000000000401175 <+47>:	lea    rax,[rip+0xe88]        # 0x402004
+   0x000000000040117c <+54>:	mov    rdi,rax
+   0x000000000040117f <+57>:	mov    eax,0x0
+   0x0000000000401184 <+62>:	call   0x401050 <printf@plt>
+   0x0000000000401189 <+67>:	mov    DWORD PTR [rbp-0x18],0x0
+   0x0000000000401190 <+74>:	jmp    0x4011b2 <main+108>
+   0x0000000000401192 <+76>:	mov    rax,QWORD PTR [rbp-0x30]
+   0x0000000000401196 <+80>:	add    rax,0x8
+   0x000000000040119a <+84>:	mov    rdx,QWORD PTR [rax]
+   0x000000000040119d <+87>:	mov    eax,DWORD PTR [rbp-0x18]
+   0x00000000004011a0 <+90>:	cdqe
+   0x00000000004011a2 <+92>:	add    rax,rdx
+   0x00000000004011a5 <+95>:	movzx  eax,BYTE PTR [rax]
+   0x00000000004011a8 <+98>:	movsx  eax,al
+   0x00000000004011ab <+101>:	add    DWORD PTR [rbp-0x14],eax
+   0x00000000004011ae <+104>:	add    DWORD PTR [rbp-0x18],0x1
+   0x00000000004011b2 <+108>:	mov    eax,DWORD PTR [rbp-0x18]
+   0x00000000004011b5 <+111>:	movsxd rbx,eax
+   0x00000000004011b8 <+114>:	mov    rax,QWORD PTR [rbp-0x30]
+   0x00000000004011bc <+118>:	add    rax,0x8
+   0x00000000004011c0 <+122>:	mov    rax,QWORD PTR [rax]
+   0x00000000004011c3 <+125>:	mov    rdi,rax
+   0x00000000004011c6 <+128>:	call   0x401040 <strlen@plt>
+   0x00000000004011cb <+133>:	cmp    rbx,rax
+   0x00000000004011ce <+136>:	jb     0x401192 <main+76>
+   0x00000000004011d0 <+138>:	cmp    DWORD PTR [rbp-0x14],0x394
+   0x00000000004011d7 <+145>:	jne    0x4011ea <main+164>
+   0x00000000004011d9 <+147>:	lea    rax,[rip+0xe3a]        # 0x40201a
+   0x00000000004011e0 <+154>:	mov    rdi,rax
+   0x00000000004011e3 <+157>:	call   0x401030 <puts@plt>
+   0x00000000004011e8 <+162>:	jmp    0x401219 <main+211>
+   0x00000000004011ea <+164>:	lea    rax,[rip+0xe39]        # 0x40202a
+   0x00000000004011f1 <+171>:	mov    rdi,rax
+   0x00000000004011f4 <+174>:	call   0x401030 <puts@plt>
+   0x00000000004011f9 <+179>:	jmp    0x401219 <main+211>
+   0x00000000004011fb <+181>:	mov    rax,QWORD PTR [rbp-0x30]
+   0x00000000004011ff <+185>:	mov    rax,QWORD PTR [rax]
+   0x0000000000401202 <+188>:	mov    rsi,rax
+   0x0000000000401205 <+191>:	lea    rax,[rip+0xe2d]        # 0x402039
+   0x000000000040120c <+198>:	mov    rdi,rax
+   0x000000000040120f <+201>:	mov    eax,0x0
+   0x0000000000401214 <+206>:	call   0x401050 <printf@plt>
+   0x0000000000401219 <+211>:	mov    eax,0x0
+   0x000000000040121e <+216>:	mov    rbx,QWORD PTR [rbp-0x8]
+   0x0000000000401222 <+220>:	leave
+   0x0000000000401223 <+221>:	ret
+End of assembler dump.
+(gdb) 
