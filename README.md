@@ -13,9 +13,12 @@
 
 [microcorruption](https://microcorruption.com/)
 
+[Smashing the stack for fun and profit](https://phrack.org/issues/49/14)
+
 ## TOOLS
 [ghidra](https://github.com/NationalSecurityAgency/ghidra)
 
 [radare2](https://github.com/radareorg/radare2)
 
 [gdb extensions](https://infosecwriteups.com/pwndbg-gef-peda-one-for-all-and-all-for-one-714d71bf36b8)
+
