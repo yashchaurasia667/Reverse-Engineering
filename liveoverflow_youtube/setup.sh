@@ -2,7 +2,7 @@
 
 # enable core dumps
 echo "enabling core dumps..."
-echo "core.%e.%p" | sudo tee /proc/sys/kernel/core_pattern
+echo "/tmp/core.%e.%p" | sudo tee /proc/sys/kernel/core_pattern
 ulimit -S -c unlimited
 
 # disable aslr
