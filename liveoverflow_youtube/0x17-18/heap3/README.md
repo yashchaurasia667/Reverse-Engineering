@@ -119,10 +119,12 @@ The malloc implementation uses these 3 bits as flag values. Quoting from the gli
 > **P (0x01)**  
 > Previous chunk is in use - if set, the previous chunk is still being used by the application, and thus the prev_size field is invalid. Note - some chunks, such as those in fastbins (see below) will have this bit set despite being freed by the application. This bit really means that the previous chunk should not be considered a candidate for coalescing - it's "in use" by either the application or some other optimization layered atop malloc's original code.
 
+
 When a chunk is freed, it is added to the doubly linked list that is used to track which chunks are currently free. The fd and bk members are pointers to the next and the previous chunks and are only set when a chunk is freed.
 The unlink() technique relies on a specific behaviour of the free() function which.
 > [1] If the chunk located immediately before the chunk to be freed is unused, it is taken off its doubly-linked list via unlink() (if it is not the 'last_remainder') and consolidated with the chunk being freed.
 > [2] If the chunk located immediately after the chunk to be freed is unused, it is taken off its doubly-linked list via unlink() (if it is not the 'last_remainder') and consolidated with the chunk being freed.
+
 
 Whether or not a previous chunk is considered unused is determined by whether the prev_size member on the current chunk is set.
 
@@ -139,25 +141,29 @@ When calling free() on a chunk, unlink() performs two actions.
 > 1. Writes the value of P->bk to (P->fd) + 12
 > 2. Writes the value of P->fd to (P->bk) + 8
 
+
 ![before linking](https://i.imgur.com/FORracn.png)
 ![after linking](https://i.imgur.com/b3rmDRo.png)
+
 
 In above code we can see that even after freeing the fd is set in the chunks, bk and prev_size are not. This is due to a feature called fastbins. Quoting from the glibc Malloc Internals page,
 
 > Small chunks are stored in size-specific bins. Chunks added to a fast bin ("fastbin") are not combined with adjacent chunks - the logic is minimal to keep access fast (hence the name). Chunks in the fastbins may be moved to other bins as needed. Fastbin chunks are stored in a single linked list, since they're all the same size and chunks in the middle of the list need never be accessed.
+
 
 During exploitation we need free() to treat our chunks as normal chunks rather than fastbins, so we'll have to increase the size of the chunks which we can control to more than 80 bytes.
 
 > There is one final hurdle to exploitation that we need to overcome. Writing to the size and prev_size members require the use of NULL bytes. We are unable to do so because any NULL bytes that we pass to the program as an argument will be treated as a string terminator.
 The Phrack paper [Once upon a free()](https://phrack.org/issues/57/9) describes a clever trick to avoid this issue. If we supply a value like 0xFFFFFFFC (-4 as a signed integer), the allocator will not place the chunk in the fastbin as 0xFFFFFFFC as an unsigned integer is a much larger value than 80. Due to an integer overflow during pointer arithmetic, the allocator thinks that the previous chunk actually starts at 4 bytes past the start of the current chunk.
 
+
 ![heap after using 0xfffffffc](https://i.imgur.com/ijrSqfw.png)
 
+
+## exploit command
 ```bash
-./heap3 AAAA $(python2 -c "print 'B'*32 + '\xfc\xff\xff\xff'*2 + 'A'*4") $(python2 -c "print 'A'*4 + '\x1c\xb1\x04\x08' + '\x5c\x88\x04\x08'")
-# <puts@got.plt> 0x804b128
-# <puts@got.plt-12> 0x804b11c
-# <puts@got.plt-0xf3c> 0x804a1ec
-#
-# <winner> 0x8048864
+./heap3 $(python2 -c "print 'AAAA'*3+'\xB8\x64\x88\x04\x08\xFF\xD0'") $(python2 -c "print 'B'*36 + '\x65'") $(python2 -c "print '\xfc\xff\xff\xff'*2+'\x1c\xb1\x04\x08' + '\x14\xc0\x04\x08'")
 ```
+
+
+![success](https://i.imgur.com/RTwDtTH.png)
